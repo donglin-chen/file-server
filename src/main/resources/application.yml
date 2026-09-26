@@ -1,0 +1,32 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /file-server
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  application:
+    name: file-server
+
+# 日志配置
+logging:
+  # 日志文件路径（相对路径基于应用工作目录）
+  file:
+    name: logs/app.log
+  # 滚动策略：单文件超过 50MB 归档，保留 30 天，总量上限 2GB
+  logback:
+    rollingpolicy:
+      max-file-size: 50MB
+      max-history: 30
+      total-size-cap: 2GB
+  level:
+    root: info
+    com.xiaojiang: info
+
+# 文件存储配置
+file:
+  # 上传文件保存目录（相对路径基于项目工作目录）
+  upload-dir: /data/uploads

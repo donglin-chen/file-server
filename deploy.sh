@@ -14,12 +14,12 @@ set -euo pipefail
 
 # ===== 配置区 =====
 APP_NAME="file-server"
-REPO_DIR="/opt/file-server/repo"          # 代码仓库目录（git clone 到此目录）
+REPO_DIR="/data/code/file-server"          # 代码仓库目录（git clone 到此目录）
 GIT_BRANCH="main"                         # 部署分支
-DEPLOY_DIR="/opt/file-server"             # 服务运行目录（jar 拷贝到这里）
+DEPLOY_DIR="/data/code/file-server"             # 服务运行目录（jar 拷贝到这里）
 JAVA_BIN="java"                           # java 命令路径
 MVN_BIN="mvn"                             # maven 命令路径
-JVM_OPTS="-Xms256m -Xmx512m"              # JVM 参数
+JVM_OPTS="-Xms256m -Xmx256m"              # JVM 参数
 APP_VERSION="1.0.0"                       # 与 pom.xml 的 version 保持一致
 # ==================
 

@@ -98,7 +98,7 @@ start() {
       exit 1
     fi
     PORT=$(grep -E '^\s*port:' "${DEPLOY_DIR}/application.yml" 2>/dev/null | awk '{print $2}' || true)
-    PORT=${PORT:-8080}
+    PORT=${PORT:-8899}
     if curl -s -o /dev/null "http://localhost:${PORT}/file-server/" 2>/dev/null; then
       log "启动成功，pid=$(pid)，地址: http://localhost:${PORT}/file-server/"
       return 0

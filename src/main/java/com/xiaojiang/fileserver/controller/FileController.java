@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -33,7 +32,7 @@ public class FileController {
     }
 
     /** 上传文件（单文件），需指定命名空间和 env */
-    @PostMapping
+    @PostMapping("/upload")
     public ResponseEntity<Map<String, String>> upload(@RequestParam("namespace") String namespace,
                                                       @RequestParam("env") String env,
                                                       @RequestParam("file") MultipartFile file) {
@@ -46,7 +45,7 @@ public class FileController {
     }
 
     /** 上传多个文件到同一命名空间 + env */
-    @PostMapping("/batch")
+    @PostMapping("/upload/batch")
     public ResponseEntity<List<Map<String, String>>> uploadBatch(
             @RequestParam("namespace") String namespace,
             @RequestParam("env") String env,
@@ -116,14 +115,8 @@ public class FileController {
                 "deleted", deleted));
     }
 
+    /** 返回文件相对路径（下载由 nginx 直接代理存储目录，拼接域名即可访问） */
     private String buildDownloadUrl(String namespace, String env, String filename) {
-        return ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/files/")
-                .path(namespace)
-                .path("/")
-                .path(env)
-                .path("/")
-                .path(filename)
-                .toUriString();
+        return "/" + namespace + "/" + env + "/" + filename;
     }
 }
